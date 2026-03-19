@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forever and Always ❤️</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Quicksand:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: #e6e6fa; /* lavender base */
+            background-image: radial-gradient(circle at 10% 30%, #b0e0e6 0%, transparent 30%),
+                              radial-gradient(circle at 90% 70%, #b0c4de 0%, transparent 40%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* falling hearts */
+        .heart {
+            position: fixed;
+            font-size: 1.5rem;
+            top: -10vh;
+            animation: fall 4s linear forwards;
+            z-index: 0;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh); }
+        }
+
+        /* main card */
+        .card {
+            background: rgba(255, 250, 255, 0.8);
+            backdrop-filter: blur(5px);
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+            width: 100%;
+            padding: 40px 30px;
+            margin: 20px 0;
+            text-align: center;
+            z-index: 10;
+            border: 2px solid rgba(180, 170, 220, 0.5);
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: #7b4f9c;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .personal-message {
+            font-size: 1.2rem;
+            color: #4a4a4a;
+            margin: 25px 0 30px;
+            line-height: 1.8;
+            white-space: pre-line;
+        }
+
+        /* YouTube music player */
+        .music-player {
+            margin: 30px 0 20px;
+            width: 100%;
+        }
+
+        .music-player h3 {
+            font-family: 'Dancing Script', cursive;
+            color: #7b4f9c;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .music-note {
+            font-size: 0.9rem;
+            color: #a0a0a0;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* interactive sections */
+        .interactive-area {
+            margin: 40px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        /* reasons box */
+        .reasons-box {
+            background: rgba(255,255,255,0.5);
+            border-radius: 20px;
+            padding: 20px;
+            width: 100%;
+            max-width: 400px;
+            border: 2px dashed #b0e0e6;
+        }
+
+        .reasons-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: #7b4f9c;
+            margin-bottom: 15px;
+        }
+
+        #reasonDisplay {
+            font-size: 1.2rem;
+            color: #5a5a5a;
+            margin: 15px 0;
+            min-height: 60px;
+            padding: 10px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .reason-button {
+            background: #b0e0e6;
+            border: none;
+            color: #4a4a4a;
+            font-size: 1rem;
+            padding: 10px 25px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+
+        .reason-button:hover {
+            background: #89CFF0;
+            color: white;
+        }
+
+        /* floating heart game */
+        .heart-game {
+            background: rgba(255,255,255,0.5);
+            border-radius: 20px;
+            padding: 20px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .heart-game p {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .floating-heart {
+            font-size: 4rem;
+            cursor: pointer;
+            display: inline-block;
+            transition: transform 0.2s;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating-heart:hover {
+            transform: scale(1.1);
+        }
+
+        #complimentMessage {
+            font-size: 1.1rem;
+            color: #7b4f9c;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* love meter */
+        .love-meter {
+            width: 100%;
+            max-width: 400px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 20px;
+            padding: 20px;
+        }
+
+        .meter-bar {
+            width: 100%;
+            height: 30px;
+            background: #ddd;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        #meterFill {
+            height: 100%;
+            width: 0%;
+            background: #ff8aa8;
+            transition: width 0.5s;
+        }
+
+        #meterText {
+            font-size: 1rem;
+            color: #4a4a4a;
+        }
+
+        .meter-button {
+            background: #b19cd9;
+            border: none;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        /* Yes/No section */
+        .question-box {
+            margin: 40px 0 20px;
+        }
+
+        .ask {
+            font-size: 1.8rem;
+            font-family: 'Dancing Script', cursive;
+            color: #6a4e8a;
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .yes-button, .no-button {
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            padding: 15px 40px;
+            border-radius: 60px;
+            cursor: pointer;
+            font-family: 'Dancing Script', cursive;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            min-width: 150px;
+        }
+
+        .yes-button {
+            background: #89CFF0;
+        }
+
+        .yes-button:hover {
+            background: #6ab0d6;
+            transform: scale(1.05);
+        }
+
+        .no-button {
+            background: #b19cd9;
+        }
+
+        .no-button:hover {
+            background: #9b7bb5;
+        }
+
+        .response-message {
+            margin-top: 30px;
+            font-size: 1.5rem;
+            font-family: 'Dancing Script', cursive;
+            color: #b34e6e;
+            min-height: 60px;
+        }
+
+        .final-message {
+            font-size: 2.5rem;
+            font-family: 'Dancing Script', cursive;
+            color: #d44e6c;
+            margin: 30px 0;
+        }
+
+        .footer-note {
+            font-size: 0.9rem;
+            color: #a0a0a0;
+            margin-top: 30px;
+            font-style: italic;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>Hope Modise, <br> will you be my girlfriend?</h1>
+
+        <div class="personal-message">
+            You already read the letter my love, and I just thought this would be cute. I love you, beautiful.
+        </div>
+
+        <!-- YouTube Song Player with your specific embed -->
+        <div class="music-player">
+            <h3>🎵 Our Song 🎵</h3>
+            <div class="video-wrapper">
+                <iframe 
+                    src="https://www.youtube.com/embed/5i6A1IHAQsg?si=0H-4OPkwS9wQ21lW" 
+                    title="YouTube video player" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    referrerpolicy="strict-origin-when-cross-origin" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <p class="music-note">Click play to listen 💕</p>
+        </div>
+
+        <!-- Interactive section -->
+        <div class="interactive-area">
+            <!-- 1. Reasons I love you -->
+            <div class="reasons-box">
+                <div class="reasons-title">💕 Reasons I Love You 💕</div>
+                <div id="reasonDisplay">Click the button to find out!</div>
+                <button class="reason-button" id="nextReasonBtn">Show me a reason</button>
+            </div>
+
+            <!-- 2. Floating heart compliments -->
+            <div class="heart-game">
+                <p>Click the floating heart for a sweet compliment:</p>
+                <span class="floating-heart" id="complimentHeart">❤️</span>
+                <div id="complimentMessage"></div>
+            </div>
+
+            <!-- 3. Love meter -->
+            <div class="love-meter">
+                <p>Our love meter <span id="meterValue">0%</span></p>
+                <div class="meter-bar">
+                    <div id="meterFill" style="width: 0%;"></div>
+                </div>
+                <button class="meter-button" id="fillMeterBtn">Fill with love 💘</button>
+                <div id="meterText">Keep filling!</div>
+            </div>
+        </div>
+
+        <!-- Yes/No Section -->
+        <div class="question-box" id="questionBox">
+            <p class="ask">So, what do you say?</p>
+            <div class="buttons">
+                <button class="yes-button" id="yesBtn">Yes 💖</button>
+                <button class="no-button" id="noBtn">No</button>
+            </div>
+            <div id="response" class="response-message"></div>
+        </div>
+
+        <!-- Final Yes message -->
+        <div id="yesMessage" class="final-message hidden">
+            💕 She said YES! 💕<br>
+            <span style="font-size: 1.5rem;">I'm the luckiest.</span>
+        </div>
+
+        <div class="footer-note">
+            made with ❤️ just for you
+        </div>
+    </div>
+
+    <script>
+        // Falling hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+            heart.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
+            heart.style.opacity = Math.random() * 0.5 + 0.3;
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 6000);
+        }
+        setInterval(createHeart, 400);
+
+        // Reasons I love you - array of personalized reasons
+        const reasons = [
+            "Your smile lights up the room.",
+            "You are smart.",
+            "I love how you get my humour.",
+            "You're incredibly smart and ambitious.",
+            "Being with you feels like home.",
+            "I love your bold head",
+            "Your strength inspires me.",
+            "He who finds a wife finds a good thing well i found you.",
+            "You're beautiful inside and out.",
+            "You're my favorite thought."
+        ];
+
+        let reasonIndex = 0;
+        const reasonDisplay = document.getElementById('reasonDisplay');
+        const nextReasonBtn = document.getElementById('nextReasonBtn');
+
+        nextReasonBtn.addEventListener('click', () => {
+            reasonDisplay.textContent = reasons[reasonIndex];
+            reasonIndex = (reasonIndex + 1) % reasons.length;
+        });
+
+        // Floating heart compliments
+        const compliments = [
+            "You're the most beautiful person I know.",
+            "You have an amazing smile.",
+            "Body is tea.",
+            "You're so talented at everything you do.",
+            "Letwadi",
+            "You're incredibly thoughtful and intentional.",
+            "You make me feel heard and seen .",
+            "You're perfect just the way you are.",
+            "I'm so lucky to have you.",
+            "You are the best part of my day"
+        ];
+
+        const complimentHeart = document.getElementById('complimentHeart');
+        const complimentMessage = document.getElementById('complimentMessage');
+
+        complimentHeart.addEventListener('click', () => {
+            const randomIndex = Math.floor(Math.random() * compliments.length);
+            complimentMessage.textContent = compliments[randomIndex];
+        });
+
+        // Love meter
+        let meter = 0;
+        const meterFill = document.getElementById('meterFill');
+        const meterValue = document.getElementById('meterValue');
+        const meterText = document.getElementById('meterText');
+        const fillMeterBtn = document.getElementById('fillMeterBtn');
+
+        fillMeterBtn.addEventListener('click', () => {
+            if (meter < 100) {
+                meter += 10;
+                meterFill.style.width = meter + '%';
+                meterValue.textContent = meter + '%';
+                if (meter === 100) {
+                    meterText.textContent = '💯 Full of love! 💯';
+                } else {
+                    meterText.textContent = 'More love to give!';
+                }
+            } else {
+                meterText.textContent = 'It’s overflowing! ❤️';
+            }
+        });
+
+        // Yes/No interaction
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const responseDiv = document.getElementById('response');
+        const questionBox = document.getElementById('questionBox');
+        const yesMessage = document.getElementById('yesMessage');
+
+        let noCount = 0;
+
+        function handleYes() {
+            questionBox.classList.add('hidden');
+            yesMessage.classList.remove('hidden');
+        }
+
+        yesBtn.addEventListener('click', handleYes);
+
+        noBtn.addEventListener('click', () => {
+            noCount++;
+
+            yesBtn.style.transform = `scale(${1 + noCount * 0.1})`;
+
+            if (noCount === 1) {
+                responseDiv.innerHTML = '😢 Please say Yes!';
+                noBtn.textContent = 'No 😢';
+            } else if (noCount === 2) {
+                responseDiv.innerHTML = '🥺 Are you sure?';
+                noBtn.textContent = 'No 🥺';
+            } else if (noCount === 3) {
+                responseDiv.innerHTML = 'You know you want to! 💕';
+                noBtn.classList.remove('no-button');
+                noBtn.classList.add('yes-button');
+                noBtn.textContent = 'Yes 💖';
+                // Replace click event
+                noBtn.removeEventListener('click', this);
+                noBtn.addEventListener('click', handleYes);
+            } else {
+                handleYes();
+            }
+        });
+    </script>
+</body>
+</html>
